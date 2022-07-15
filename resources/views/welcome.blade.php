@@ -1,3 +1,4 @@
+@extends('partials.header')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -18,22 +19,19 @@
             body {
                 font-family: 'Nunito', sans-serif;
                 background: #596477;
-                margin: 10%;
                 display: flex;
-                justify-content: center
             }
             .container{
-                justify-content: center
+                margin: 50px auto;
             }
             .card{
-                text-align: center;
                 background: #fff;
                 width: 420px;
                 height: 300px;
-                margin: 10px;
+                margin: 100px;
                 border-radius: 5%;
-                
-                justify-content: center
+                justify-content: center;
+                text-align: center;
             }
             .card h2{
                 margin: 0;
@@ -54,17 +52,19 @@
             }
         </style>
     </head>
-    <body class="antialiased">
-       <div class="container">
-           @foreach ($products as $product)
-           <div class="card">
-            <br>
-                <h2>{{ $product["name"]}}</h2><br>
-                <p> cantidad: {{ $product["quantity"]}} </p>
-                <a href="{{ route('products.details', ['id'  =>  $product["id"] ]) }}">Detalles</a>
-                <button>Eliminar</button>
-            </div>
-           @endforeach
-       </div>
+        
+
+    <body >
+        <div class="container">
+            @foreach ($products as $product)
+            <div class="card">
+             <br>
+                 <h2>{{ $product["name"]}}</h2><br>
+                 <p> cantidad: {{ $product["quantity"]}} </p>
+                 <a href="{{ route('products.details', ['id'  =>  $product["id"] ]) }}">Detalles</a>
+                 <button>Eliminar</button>
+             </div>
+            @endforeach
+        </div>
     </body>
 </html>

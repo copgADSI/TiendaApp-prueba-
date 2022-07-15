@@ -1,3 +1,4 @@
+@extends('partials.header')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +10,12 @@
 <body>
     <style>
         body {
-                font-family: 'Nunito', sans-serif;
+            font-family: 'Nunito', sans-serif;
                 background: #596477;
-                margin: 10%;
                 display: flex;
-                justify-content: center
             }
         .container{
-                justify-content: center
+                margin: 50px auto;
             }
             .card{
                 text-align: center;
@@ -54,11 +53,11 @@
             <div class="card">
                 @if (isset($product))
                     <br>
-                    {{ $product["id"] }}
-                    <h2>{{ $product["name"]}}</h2><br>
-                    <p> cantidad: {{ $product["quantity"]}} </p>
+                    <h2>{{ $product["name"]}}</h2><br><br>
+                    <p> cantidad: {{ $product["quantity"]}} </p><br><br>
                     <a href="{{ route('products.form_update', ['id'  =>  $product["id"] ]) }}">Modificar</a>
-                    <button>Eliminar</button>
+                    <a style="background: red" href="{{ route('products.delete', [ 'id' => $product["id"] ] ) }}">Eliminar</a>
+                    <a href="{{ route('products.index') }} ">Volver</a>
                 @else
                     <span>No existe producto...</span>
                 @endif    

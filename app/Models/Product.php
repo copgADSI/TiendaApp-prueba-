@@ -10,6 +10,11 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
 
+    const KEYS_FIELDS = [
+        'id', 'name', 'quantity', 
+        'brand_id', 'size_id', 'remarks',
+        'date_shipment'
+    ];
     public function size()
     {
         return $this->hasOne(Size::class, 'foreign_key');
@@ -19,4 +24,5 @@ class Product extends Model
     {
         return $this->hasOne(Brand::class, 'foreign_key');
     }
+    
 }
