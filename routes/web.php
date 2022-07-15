@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 /* PRODUCT */
 Route::get('/', [ProductsController::class, 'index'])->name('products.index');
+Route::post('/create', [ProductsController::class, 'create'])->name('products.create');
 Route::get('/details', [ProductsController::class, 'details'])->name('products.details');
 Route::get('/update_product', [ProductsController::class, 'view_update_form'])->name('products.form_update');
 Route::post('/update', [ProductsController::class, 'update'])->name('products.update');

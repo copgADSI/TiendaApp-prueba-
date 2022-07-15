@@ -50,14 +50,67 @@
                 color: white;
                 border-radius: 5px;
             }
+            .form_product{
+                margin: 10%;
+            }
+
+            form input{
+                padding: 10px;
+                width: 300px;
+            }
+            form button{
+                padding: 10px;
+                font-size: 20px
+            }
+            select{
+                width: 300px;
+                padding: 8px;
+            }
         </style>
     </head>
         
 
     <body >
         <div class="container">
+            <div class="form_product">
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                    <br>
+                    <span style="color: red">  
+                        {{ $error  }}*
+                    </span>
+                    @endforeach
+                @endif
+                <form action=" {{ route('products.create') }} " method="POST">
+                    @csrf
+                    <input type="text" name='name' placeholder="Ingresar nombre de producto*" >
+                    <br><br>
+                    <input type="number" name='quantity' placeholder="Ingresar cantidad de producto*" >
+                    <br><br>
+                    <textarea name="remarks" style="height: 40px; width: 300px;" id="remarks" cols="30" rows="10" placeholder="ingresa descripción"></textarea>
+                    <br><br>
+                    <select name="brand_id" id="brand_id">
+                        <option value="">Seleccionar marca</option>
+
+                        @foreach ($brands as $brand)
+                            <option value=" {{ $brand['id']}} "> {{ $brand['brand'] }} </option>
+                        @endforeach
+                    </select>
+                    <br><br>
+                    <select name="size_id" id="size_id">
+                        <option value="">Seleccionar talla</option>
+
+                        @foreach ($sizes as $size)
+                            <option value=" {{ $size['id']}} "> {{ $size['size'] }} </option>
+                        @endforeach
+                    </select>
+                    <br><br>
+                    <button style="background: green; color: white" type="submit">Crear</button>
+                </form>
+            </div>
             @foreach ($products as $product)
             <div class="card">
+
              <br>
                  <h2>{{ $product["name"]}}</h2><br>
                  <p> cantidad: {{ $product["quantity"]}} </p>

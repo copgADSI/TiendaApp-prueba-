@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Size;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -12,9 +13,30 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all()->toArray();
-        return view('welcome', compact('products'));
+        $brands = Brand::all()->toArray();
+        $sizes = Size::all()->toArray();
+        return view('welcome', compact('products', 'brands', 'sizes'));
     }
 
+    /**
+     * método para crear un producto nunevo
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'quantity' => 'required',
+            'brand_id' => 'required',
+            'size_id' => 'required',
+            'remarks' => 'required',
+        ]);
+
+        $product = $product->firstOrCreate($request->except(['_token']));
+        return view('details', compact('product') );
+    }
     /**
      * retorna una vista para modificar el producto
      *
